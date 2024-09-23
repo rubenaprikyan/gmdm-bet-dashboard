@@ -1,12 +1,12 @@
 'use client';
 
-import { ModeToggle } from '@/components/mode-toggle';
+import { ThemeModeToggle } from '@/components/ThemeModeToggle';
 
 function Header() {
   return (
     <header className='w-full shadow p-3 border-b'>
       <div className='mx-auto flex justify-between items-center'>
-        <ModeToggle />
+        <ThemeModeToggle />
       </div>
     </header>
   );

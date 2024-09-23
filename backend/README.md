@@ -24,7 +24,7 @@ Use `docker-down` command to stop the database instance.
 ### Migrate the Database
 
 ```bash
-npx prisma migrate dev
+npx prisma db push
 ```
 
 ### Seed the Database

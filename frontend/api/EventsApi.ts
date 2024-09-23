@@ -8,7 +8,7 @@ import { SportEvent } from '@/api/models/sport-event.model';
 class EventsApi {
   static getAll(pageParam: number, take: number) {
     return fetShim<ApiListViewModel<SportEvent>>(
-      `${endpoints.events.all(pageParam, take)}`
+      `${endpoints.events.all()}?skip=${pageParam}&take=${take}`
     );
   }
 }

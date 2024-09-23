@@ -7,8 +7,8 @@ function normalizeError(err: Error): BaseError {
     return err;
   }
 
-  // Here is the place to Normalize exceptions from other libraries, unexpected errors, etc.
-
+  // Here is the place to Normalize exceptions from
+  //  other libraries, unexpected errors, etc.
 
   return new InternalServerError('Server crashed internally for unknown reason');
 }

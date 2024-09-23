@@ -4,9 +4,11 @@ import { Poppins } from 'next/font/google';
 import ErrorContainer from '@/containers/ErrorContainer';
 import ThemeContainer from '@/containers/ThemeContainer';
 import QueryContainer from '@/containers/QueryContainer';
+import AppLayout from '@/app/AppLayout';
+
+import { Toaster } from '@/components/ui/sooner';
 
 import './globals.css';
-import AppLayout from '@/app/AppLayout';
 
 const inter = Poppins({
   subsets: ['latin'],
@@ -44,6 +46,7 @@ export default function RootLayout({
               <AppLayout>{children}</AppLayout>
             </QueryContainer>
           </ThemeContainer>
+          <Toaster position={'top-right'} />
         </ErrorContainer>
       </body>
     </html>

@@ -1,5 +1,5 @@
 import { DataSource } from '@/database/data-source';
-import { SportsEvent } from '@/database/entities';
+import { SportEvent } from '@/database/entities';
 import { PAGINATION } from '@/config/constants';
 import { BaseListRequestArgs, ServiceBaseListResponse } from '@/types';
 import { Order } from '@/config/enums';
@@ -13,12 +13,12 @@ class SportsEventService extends BaseService {
   /**
    * Returns all sports events
    * @param {BaseListRequestArgs} args - accepts take and skip
-   * @returns {Promise<SportsEvent[]>} - returns a list of sports events and count
+   * @returns {Promise<SportEvent[]>} - returns a list of sports events and count
    */
   public async getEvents({
     take = PAGINATION.TAKE,
     skip = PAGINATION.SKIP,
-  }: BaseListRequestArgs): ServiceBaseListResponse<SportsEvent> {
+  }: BaseListRequestArgs): ServiceBaseListResponse<SportEvent> {
     const [data, count] = await this._findAndCountAll({
       take,
       skip,
@@ -36,10 +36,10 @@ class SportsEventService extends BaseService {
    * @returns {Promise<[SportsEvens[], number]>}
    *  - returns a list of sportsEvent and total count
    */
-  protected async _findAndCountAll(query: any): Promise<[SportsEvent[], number]> {
+  protected async _findAndCountAll(query: any): Promise<[SportEvent[], number]> {
     return this.dataSource.$transaction([
-      this.dataSource.sportsEvent.findMany(query),
-      this.dataSource.sportsEvent.count(query),
+      this.dataSource.sportEvent.findMany(query),
+      this.dataSource.sportEvent.count(query),
     ]);
   }
 }

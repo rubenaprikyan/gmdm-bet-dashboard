@@ -8,8 +8,7 @@ function createEndpoint(postfix: string[] | string): string {
 
 const endpoints: Record<string, Record<string, (...args: any) => string>> = {
   events: {
-    all: (skip: string, take: string) =>
-      `${createEndpoint('events')}?skip=${skip}&take=${take}`,
+    all: () => createEndpoint('events'),
     single: (id: string) => createEndpoint(['events', id]),
   },
 };
