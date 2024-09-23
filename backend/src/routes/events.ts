@@ -14,7 +14,11 @@ const dataSource = CustomDataSource.getInstance();
 const sportsEventController = new SportsEventController(dataSource);
 
 // implement the routes
-router.get('/', throwable(sportsEventController.getAll));
+router.get(
+  '/',
+  // passing through arrow function to not bind the context
+  throwable(ctx => sportsEventController.getAll(ctx)),
+);
 
 export default {
   RESOURCE_NAME,
