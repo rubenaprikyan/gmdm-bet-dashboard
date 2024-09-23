@@ -1,21 +1,25 @@
+import 'module-alias/register';
+
 import express from 'express';
 import cors from 'cors';
 
-// import CustomDataSource from './database/data-source';
-import errorHandler from './middlewares/errorHandler';
+import CustomDataSource from './database/data-source';
+import errorHandler from '@/middlewares/errorHandler';
+import { crossOrigin } from '@/middlewares/crossOrigin';
 
-// import { dbConfig, serverConfig } from './config';
-import registerRoutes from './routes';
+import { dbConfig, serverConfig } from './config';
+import registerRoutes from '@/routes';
+import logger from '@/modules/logger';
 
 const app = express();
-// const AppDataSource = CustomDataSource.getInstance(dbConfig);
 
 /**
  * Middlewares
  */
 app.use(
   cors({
-    origin: '*',
+    // @ts-expect-error // not provided proper typing from lib
+    origin: crossOrigin,
   }),
 );
 app.use(express.json());
@@ -34,14 +38,16 @@ app.get('/ping', (req, res) => {
  * Error handler
  */
 app.use(errorHandler);
-//
-// AppDataSource.initialize()
-//   .then(async () => {
-//     console.log('Data Source has been initialized!');
-//   })
-//   .catch((error: Error) => console.log(error))
-//   .finally(() => {
-//     app.listen(serverConfig.port, () => {
-//       console.log(`Server listens port ${serverConfig.port}`);
-//     });
-//   });
+
+CustomDataSource.initialize({
+  log: [dbConfig.logLevel],
+})
+  .then(async () => {
+    logger.success('Data Source has been initialized!');
+  })
+  .catch((error: Error) => logger.error(error, 'ERROR INITIALIZING DATA SOURCE'))
+  .finally(() => {
+    app.listen(serverConfig.port, () => {
+      logger.success('Server listens port ', serverConfig.port);
+    });
+  });

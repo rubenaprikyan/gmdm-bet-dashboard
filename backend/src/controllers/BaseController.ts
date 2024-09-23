@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { BaseViewModel } from '../types';
+import { ApiListViewModel, BaseViewModel } from '../types';
 
 /**
  * Base Controller includes utilities for controllers
@@ -15,9 +15,25 @@ abstract class BaseController {
    * @param result
    * @protected
    */
-  protected view<T = any>(result: T): BaseViewModel<T> {
+  protected resourceView<T = any>(result: T): BaseViewModel<T> {
     return {
       data: result,
+    };
+  }
+
+  protected listView<T = any>(
+    result: T[],
+    total: number,
+    skip: number,
+    take: number,
+  ): ApiListViewModel<T> {
+    return {
+      data: result,
+      pagination: {
+        total,
+        skip,
+        take,
+      },
     };
   }
 }

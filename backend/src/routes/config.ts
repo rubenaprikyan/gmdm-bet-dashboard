@@ -1,8 +1,8 @@
 import { Router } from 'express';
-// import routes
+import events from '@/routes/events';
 
 const routes: Record<string, Router> = {
-  ['']: {} as Router,
+  [events.RESOURCE_NAME]: events.router,
 };
 
 export default routes;

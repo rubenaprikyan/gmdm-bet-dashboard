@@ -1,9 +1,6 @@
 import dotenv from 'dotenv';
 import path from 'path';
-import { URL } from 'url';
-
-// eslint-disable-next-line no-underscore-dangle
-const __dirname = new URL('.', import.meta.url).pathname;
+import * as process from 'node:process';
 
 dotenv.config({
   path: path.join(__dirname, '../../', '.env'),
@@ -21,12 +18,7 @@ export const dbConfig = {
   username: process.env.DB_USERNAME || '',
   password: process.env.DB_PASSWORD || '',
   port: intConf(process.env.DB_PORT || 5432),
-  logging:
-    // eslint-disable-next-line no-constant-condition
-    Boolean(intConf(process.env.DB_LOGGING || 0)) || true
-      ? false
-      : // eslint-disable-next-line no-undef, no-console
-        console.log.bind(console),
+  logLevel: process.env.DB_LOG_LEVEL || 'info',
   type: process.env.DB_DIALECT || 'postgres',
 };
 
@@ -49,4 +41,4 @@ export const authConfig = {
 /**
  * CORS whitelist variables
  */
-export const whiteList = process.env.CORS_WHITE_LIST;
+export const whiteList = process.env.CORS_WHITE_LIST || '';

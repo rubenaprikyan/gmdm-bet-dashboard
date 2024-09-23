@@ -1,6 +1,6 @@
 export class BaseError extends Error {
   constructor(
-    protected details: string,
+    protected details: any,
     public message: string,
     protected statusCode: number,
   ) {

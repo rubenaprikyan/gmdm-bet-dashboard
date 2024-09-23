@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { NextFunction, Request, Response } from 'express';
+import logger from '@/modules/logger';
 
 type HandlerCallbackWithCtx<T, P> = (
   ctx: { req: T; res: P },
@@ -26,8 +26,8 @@ function throwable<TReq extends Request = Request, TRes extends Response = Respo
         res.status(result.statusCode).json(result.view);
       })
       .catch(exception => {
-        console.error(exception);
-        next(exception);
+        logger.error(exception, 'throwable middleware caught an exception');
+        next?.(exception);
       });
   };
 }

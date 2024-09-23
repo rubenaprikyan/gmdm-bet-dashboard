@@ -1,7 +1,7 @@
 import express from 'express';
 import { BaseError, InternalServerError } from '../modules/exceptions';
 
-function normalizeError(err): BaseError {
+function normalizeError(err: Error): BaseError {
   // if its already normalized error, just return
   if (err instanceof BaseError) {
     return err;
@@ -17,7 +17,7 @@ export const errorHandler = async (
   err: Error,
   req: express.Request,
   res: express.Response,
-  next,
+  next: express.NextFunction,
 ) => {
   console.error(err); // TODO add proper logging
   next();

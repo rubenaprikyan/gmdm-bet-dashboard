@@ -7,7 +7,7 @@ export interface ReadableClassValidationError {
 }
 
 export class ValidationError extends BaseError {
-  constructor(details) {
+  constructor(details: any) {
     super(details, 'Validation Error', 400);
   }
 
