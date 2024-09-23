@@ -50,11 +50,12 @@ To run the backend api, you need to create `.env` folder in the root of project,
 pnpm run api-dev
 ```
 
-### Files Structure
+### Project Overview
 
 The project uses [Prisma ORM](https://www.prisma.io/docs/getting-started/setup-prisma/start-from-scratch/relational-databases/querying-the-database-typescript-postgresql),
 All models definitions are inside the `prisma/schema.prisma` file. The same folder has `seed.ts` file which includes samples of data to use during seeding the database.
 
+The project is structured as follows:
 
 `/docker` - includes docker configuration files for database and might have deployment scripts as well
 
