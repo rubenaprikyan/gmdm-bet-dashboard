@@ -4,7 +4,7 @@ import { noop } from '@/lib/utils';
 import endpoints from '@/api/endpoints';
 
 import UsersApi, { LoginParams, LoginSuccessViewModel } from '@/api/UsersApi';
-import { BaseError } from '@/api/view-models';
+import { queryClient } from "@/containers/QueryContainer";
 
 type UseLoginProps = Omit<
   UseMutationOptions<LoginSuccessViewModel, void, LoginParams>,
@@ -28,6 +28,7 @@ function useLogin({
     },
     onSuccess: (data, variables, context) => {
       localStorage.setItem('access_token', data.access_token);
+      queryClient.setQueryData(['user'], data.user);
       onSuccess?.(data, variables, context);
     },
     // this will be BaseError, need to do some type inference to get the specific error

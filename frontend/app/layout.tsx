@@ -5,11 +5,12 @@ import ErrorContainer from '@/containers/ErrorContainer';
 import ThemeContainer from '@/containers/ThemeContainer';
 import QueryContainer from '@/containers/QueryContainer';
 import AppLayout from '@/app/AppLayout';
+import PageLoader from "@/components/PageLoader";
+import dynamic from "next/dynamic";
 
 import { Toaster } from '@/components/ui/sooner';
 
 import './globals.css';
-import AuthContainer from '@/containers/AuthContainer';
 
 const inter = Poppins({
   subsets: ['latin'],
@@ -22,6 +23,12 @@ export const metadata: Metadata = {
   title: 'Sport Events',
   description: 'Sportsbook app',
 };
+
+const AuthContainer = dynamic(() => import('@/containers/AuthContainer'), {
+  loading: () => <PageLoader />,
+  ssr: false,
+});
+
 
 export default function RootLayout({
   children,

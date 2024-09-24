@@ -33,7 +33,7 @@ function EventsList() {
                 key={event.id}
               />
             ))
-          : 'No events found'}
+          :  'No events found'}
 
         {error && <div>Something Went Wrong</div>}
       </div>

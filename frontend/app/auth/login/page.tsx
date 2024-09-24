@@ -2,6 +2,9 @@
 
 import * as React from 'react';
 import * as yup from 'yup';
+import { useRouter } from 'next/navigation';
+import { toast } from 'sonner';
+import { Loader2 } from 'lucide-react';
 
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
@@ -11,12 +14,9 @@ import { Input } from '@/components/ui/input';
 import { Button } from '@/components/ui/button';
 import { Form } from '@/components/ui/form';
 import CustomFormField from '@/components/CustomFormField';
-import { Loader2 } from 'lucide-react';
 
 import { LoginSchema } from './schemas';
 import { useLogin } from '@/hooks/mutations/users';
-import { toast } from 'sonner';
-import { useRouter } from 'next/navigation';
 import { BaseError } from '@/api/view-models';
 
 type FormState = yup.InferType<typeof LoginSchema>;
@@ -29,10 +29,12 @@ const defaultValues: FormState = {
 export default function Login() {
   const router = useRouter();
 
-  const { mutate, isPending } = useLogin({
-    onSuccess: () => {
-      toast.success('Successfully signed in !');
-      // later use proper redirect, might be with next server action
+  const { mutateAsync, isPending } = useLogin({
+    onSuccess: async () => {
+      toast.success('Successfully signed in !', {
+        duration: 3000
+      });
+
       router.push('/');
     },
 
@@ -50,10 +52,10 @@ export default function Login() {
   });
 
   const onSubmit = React.useCallback(
-    (formData: FormState) => {
-      mutate(formData);
+    async (formData: FormState) => {
+        await mutateAsync(formData);
     },
-    [mutate]
+    [mutateAsync]
   );
 
   return (
