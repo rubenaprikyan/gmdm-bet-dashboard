@@ -1,0 +1,93 @@
+{
+	"info": {
+		"_postman_id": "a3a79ced-6b49-4bef-b02e-93d3949a024c",
+		"name": "gmdm-api",
+		"description": "# Gmdm API Overivew\n\nThis collection includes apis of auth task. This API follows to REST principles.\n\nEverything is resource here. All endpoints besides `ping` starts with `/api` .\n\n**Endpoint template**\n\n`HTTP METHOD` `api/`\n\n**Example:**\n\nIf you want to work with `users` you need to use `api/users`\n\n## Unified Successfull Response\n\nAll responses with this api are unified and usees the following template.\n\n``` typescript\nresponse: {\n  body: {\n    data: any // based on resource\n  },\n  statusCode // based on status code sent from server (201, 200 etc following to  rest principles)\n}\n\n ```\n\nAll responses have \"data\" key in the response.body which is the resource you are quering. For special cases there will be other keys, like \"pagination\" etc.\n\n## Unified Failure Response\n\nEach request has unified response for failed cases (statusCode >= 400, following to the rest principles) and uses the following template\n\n``` typescript\nresponse: {\n  body: {\n    error: {\n       message: string,\n       details: // any object which may include further details, like validations\n       debug?: string, // there are special strings for each errors might be useful for development mode // used for debugging reaosons\n       statusCode: number\n    },\n} // based on resource\n  },\n  statusCode // based on status code sent from server (201, 200 etc following to  rest principles)\n}\n\n ```",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "17779574",
+		"_collection_link": ""
+	},
+	"item": [
+		{
+			"name": "users",
+			"item": [
+				{
+					"name": "login",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@gmdm.com\",\n    \"password\": \"Password123!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "{{api-url}}/users/login"
+					},
+					"response": []
+				}
+			],
+			"description": "# /login\n\n# Successful Response\n\n``` json\n{\n    \"data\": {\n        \"access_token\": \"eyJhbGciOiJIUzUxMiIsInR5cCI6IkpXVCJ9.eyJzYWx0IjoicmFuZG9tLXNhbHQiLCJlbWFpbCI6InRlc3RAZ21kbS5jb20iLCJpYXQiOjE3MjcxODUyMzMsImV4cCI6MTcyNzI3MTYzM30.pHH5gO8Xxs3y91fPdHGR6T7abA47784DVsmJbG1UXLqkWu14TCNIkLQ2fKUuAy5tx3N6ZyhOumGpZy_uIPCjhg\",\n        \"user\": {\n            \"id\": \"f0c8beb6-6198-4af6-bed9-885941ccd07e\",\n            \"email\": \"test@gmdm.com\",\n            \"password\": \"$2b$08$SdG5xJBym/s9o/GwIrbetukZP9B/PCMD9cs8DTiL6SMJwprQpe4sC\",\n            \"accessTokenSalt\": \"random-salt\",\n            \"createdAt\": \"2024-09-24T12:25:03.708Z\",\n            \"updatedAt\": \"2024-09-24T12:25:03.708Z\"\n        }\n    }\n}\n\n ```\n\nError Response\n\n``` json\n\"error\": {\n        \"statusCode\": 400,\n        \"message\": \"Validation Error\"\n        \"details\": [\n            {\n                \"key\": \"user\",\n                \"details\": [\n                    {\n                        \"key\": \"email\",\n                        \"details\": {\n                            \"isEmail\": \"Invalid email format\"\n                        }\n                    },\n                    {\n                        \"key\": \"password\",\n                        \"details\": {\n                            \"minLength\": \"Password should have at least 6 characters\"\n                        }\n                    }\n                ]\n            }\n        ]\n    }\n}\n\n ```"
+		},
+		{
+			"name": "events",
+			"item": [
+				{
+					"name": "getAll",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"description": "Reqeust Params\n\n```\nskip=0&take=10\n\n ```\n\nDesigned with pagination\n\n**Response**"
+					},
+					"response": []
+				}
+			],
+			"description": "## Designed to get sport events\n\n# Successfull Response\n\n``` json\n{\n    \"data\": [\n        {\n            \"id\": \"cm1geso9o0004122qjugz1mag\",\n            \"name\": \"Hockey: Team I vs. Team J\",\n            \"odds\": \"2\",\n            \"createdAt\": \"2024-09-24T12:25:03.708Z\"\n        },\n        {\n            \"id\": \"cm1geso9o0000122q9fnfm2ct\",\n            \"name\": \"Soccer: Team A vs. Team B\",\n            \"odds\": \"1.75\",\n            \"createdAt\": \"2024-09-24T12:25:03.708Z\"\n        },\n        {\n            \"id\": \"cm1geso9o0001122qmjgppyta\",\n            \"name\": \"Basketball: Team C vs. Team D\",\n            \"odds\": \"2.1\",\n            \"createdAt\": \"2024-09-24T12:25:03.708Z\"\n        },\n        {\n            \"id\": \"cm1geso9o0002122qtrjuazsh\",\n            \"name\": \"Tennis: Player E vs. Player F\",\n            \"odds\": \"1.9\",\n            \"createdAt\": \"2024-09-24T12:25:03.708Z\"\n        },\n        {\n            \"id\": \"cm1geso9o0003122qnust02l4\",\n            \"name\": \"Baseball: Team G vs. Team H\",\n            \"odds\": \"1.85\",\n            \"createdAt\": \"2024-09-24T12:25:03.708Z\"\n        },\n        {\n            \"id\": \"cm1ga17eo0004q654hac55c2g\",\n            \"name\": \"Hockey: Team I vs. Team J\",\n            \"odds\": \"2\",\n            \"createdAt\": \"2024-09-24T10:11:43.680Z\"\n        },\n        {\n            \"id\": \"cm1ga17en0003q6541gr633z1\",\n            \"name\": \"Baseball: Team G vs. Team H\",\n            \"odds\": \"1.85\",\n            \"createdAt\": \"2024-09-24T10:11:43.679Z\"\n        },\n        {\n            \"id\": \"cm1ga17el0002q654gbjjjsly\",\n            \"name\": \"Tennis: Player E vs. Player F\",\n            \"odds\": \"1.9\",\n            \"createdAt\": \"2024-09-24T10:11:43.677Z\"\n        },\n        {\n            \"id\": \"cm1ga17ek0001q654r73p1rfj\",\n            \"name\": \"Basketball: Team C vs. Team D\",\n            \"odds\": \"2.1\",\n            \"createdAt\": \"2024-09-24T10:11:43.676Z\"\n        },\n        {\n            \"id\": \"cm1ga17ed0000q654dqg0bcwv\",\n            \"name\": \"Soccer: Team A vs. Team B\",\n            \"odds\": \"1.75\",\n            \"createdAt\": \"2024-09-24T10:11:43.669Z\"\n        }\n    ],\n    \"pagination\": {\n        \"total\": 10,\n        \"skip\": 0,\n        \"take\": 10\n    }\n}\n\n ```\n\n# Failed Response\n\n``` json\n{\n    \"error\": {\n        \"details\": \"Unauthorized\",\n        \"message\": \"Unauthorized\",\n        \"statusCode\": 401\n    }\n}\n\n ```"
+		}
+	],
+	"auth": {
+		"type": "inherit",
+		"inherit": {}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "https://farming-simulator.pstmn.io",
+			"disabled": true
+		},
+		{
+			"key": "api-url",
+			"value": "http://localhost:4000/api",
+			"type": "string"
+		},
+		{
+			"key": "api-host",
+			"value": "http://localhost:4000/api",
+			"type": "string",
+			"disabled": true
+		}
+	]
+}

@@ -1,25 +1,22 @@
 import express from 'express';
 import CustomDataSource from '@/database/data-source';
+import UsersController from '@/controllers/UsersController';
 import throwable from '@/modules/exceptions/throwable';
-
-import SportsEventController from '@/controllers/SportsEventController';
-import auth from '@/middlewares/auth';
 
 /**
  * RESOURCE_NAME used as the rest api principle
  */
-const RESOURCE_NAME = '/events';
+const RESOURCE_NAME = '/users';
 const router = express.Router();
 
 const dataSource = CustomDataSource.getInstance();
-const sportsEventController = new SportsEventController(dataSource);
+const usersController = new UsersController(dataSource);
 
 // implement the routes
-router.get(
-  '/',
-  auth,
+router.post(
+  '/login',
   // passing through arrow function to not bind the context
-  throwable(ctx => sportsEventController.getAll(ctx)),
+  throwable(ctx => usersController.login(ctx)),
 );
 
 export default {

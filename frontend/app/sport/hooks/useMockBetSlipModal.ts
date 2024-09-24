@@ -7,7 +7,13 @@ function useMockBetSlipModal() {
   const [isOpen, setIsOpen] = useState(false);
   const [selectedEvent, setSelectedEvent] = useState<SportEvent | null>(null);
 
-  const handleModalState = (value: boolean) => setIsOpen(value);
+  const handleModalState = (value: boolean) => {
+    if (value === false) {
+      setSelectedEvent(null);
+    }
+
+    setIsOpen(value);
+  };
 
   const handleBetClick = (event: SportEvent) => {
     setSelectedEvent(event);

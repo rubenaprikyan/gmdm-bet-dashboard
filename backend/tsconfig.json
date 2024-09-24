@@ -14,6 +14,7 @@
     "sourceMap": true,
     "moduleResolution": "Node",
     "allowSyntheticDefaultImports": true,
+    "strictPropertyInitialization": false,
     "resolveJsonModule": true,
     "baseUrl": "./",
     "paths": {

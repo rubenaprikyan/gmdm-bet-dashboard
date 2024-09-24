@@ -38,11 +38,14 @@ function EventsList() {
         {error && <div>Something Went Wrong</div>}
       </div>
 
-      <MockBetSlip
-        isOpen={isOpen}
-        setIsOpen={setIsOpen}
-        event={selectedEvent!}
-      />
+      {/* using this condition to unmount modal component to reset internal states */}
+      {isOpen && (
+        <MockBetSlip
+          isOpen={isOpen}
+          setIsOpen={setIsOpen}
+          event={selectedEvent!}
+        />
+      )}
     </div>
   );
 }

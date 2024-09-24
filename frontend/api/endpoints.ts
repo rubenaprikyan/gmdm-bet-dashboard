@@ -11,6 +11,10 @@ const endpoints: Record<string, Record<string, (...args: any) => string>> = {
     all: () => createEndpoint('events'),
     single: (id: string) => createEndpoint(['events', id]),
   },
+
+  users: {
+    login: () => createEndpoint('users/login'),
+  },
 };
 
 export default endpoints;

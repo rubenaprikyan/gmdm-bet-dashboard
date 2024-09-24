@@ -1,6 +1,10 @@
+## Project Overview
+The project is a simple REST API for a sport events application. Structured in a way that it can be easily extended to include more features.
+[Postman Collection](./docs/Blog.postman_collection.json)
+
 ## How to run the project
 
-To work with the back-end project please go to the /backend folder in your terminal
+To work with the back-end project please go to the `/backend` folder in your terminal
 
 ```bash
 cd backend

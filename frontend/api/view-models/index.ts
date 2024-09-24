@@ -25,3 +25,21 @@ export interface ApiResourceViewModel<TData>
     BaseApiErrorResponse {
   data: TData;
 }
+
+export class BaseError extends Error {
+  constructor(
+    public details: any,
+    public message: string,
+    public statusCode: number
+  ) {
+    super(message);
+  }
+
+  public getError() {
+    return {
+      message: this.message,
+      details: this.details,
+      statusCode: this.statusCode,
+    };
+  }
+}

@@ -13,6 +13,7 @@ class ErrorContainer extends React.Component<IErrorContainerProps, any> {
       error,
       errorInfo,
     });
+    if (__DEV__) throw error;
   }
 
   render() {

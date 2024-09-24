@@ -18,7 +18,7 @@ import { Form, FormLabel } from '@/components/ui/form';
 import { SportEvent } from '@/api/models/sport-event.model';
 
 import CustomFormField from '@/components/CustomFormField';
-import { PlaceBetSchema } from '@/app/sport/components/schemas';
+import { PlaceBetSchema } from '@/app/sport/schemas';
 import { usePlaceBet } from '@/hooks/mutations/sport/bet';
 import { toast } from 'sonner';
 import { BaseApiErrorResponse } from '@/api/view-models';
@@ -32,6 +32,14 @@ export interface IMockBetSlipProps {
 type FormState = Yup.InferType<typeof PlaceBetSchema>;
 
 function MockBetSlip({ isOpen, setIsOpen, event }: IMockBetSlipProps) {
+  const form = useForm<FormState>({
+    mode: 'onChange',
+    resolver: yupResolver(PlaceBetSchema),
+    defaultValues: {
+      betAmount: 0,
+    },
+  });
+
   const { mutate, isPending } = usePlaceBet({
     onSuccess: () => {
       toast.success('Bet placed successfully', {
@@ -44,14 +52,6 @@ function MockBetSlip({ isOpen, setIsOpen, event }: IMockBetSlipProps) {
       // TODO test error handling properly
       const err = error as unknown as BaseApiErrorResponse;
       toast.error(err.error.details?.message);
-    },
-  });
-
-  const form = useForm<FormState>({
-    mode: 'onChange',
-    resolver: yupResolver(PlaceBetSchema),
-    defaultValues: {
-      betAmount: 0,
     },
   });
 
@@ -69,7 +69,7 @@ function MockBetSlip({ isOpen, setIsOpen, event }: IMockBetSlipProps) {
       <DialogContent className='py-4 top-[25%]'>
         <DialogHeader>
           <DialogTitle>
-            {event?.eventName} - x{event?.odds}
+            {event?.event_name} - x{event?.odds}
           </DialogTitle>
         </DialogHeader>
         <Form form={form} onSubmit={onSubmit}>

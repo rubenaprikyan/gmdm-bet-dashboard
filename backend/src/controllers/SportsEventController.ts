@@ -2,6 +2,7 @@ import BaseController from './BaseController';
 import SportsEventService from '@/services/SportsEventService';
 import { DataSource } from '@/database/data-source';
 import { Context } from '@/types';
+import { PaginationDto } from '@/controllers/dtos/base';
 
 class SportsEventController extends BaseController {
   private sportsEventService: SportsEventService;
@@ -16,11 +17,11 @@ class SportsEventController extends BaseController {
    * @param ctx - Context
    */
   async getAll(ctx: Context) {
-    const { take, skip } = ctx.req.query;
+    const { take, skip } = await PaginationDto.validateAndReturn(ctx.req.query);
 
     const result = await this.sportsEventService.getEvents({
-      take: parseInt(take as string, 10),
-      skip: parseInt(skip as string, 10),
+      take: take,
+      skip: skip,
     });
 
     return {

@@ -13,10 +13,24 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// TODO add min max constraints to all fields to not overload the database
+
 model SportEvent {
-  id   String  @id @default(cuid())
-  name String
-  odds Decimal @db.Decimal(5, 2)
+  event_id   String  @id @default(cuid())
+  event_name String
+  odds       Decimal @db.Decimal(5, 2)
+
+  createdAt DateTime @default(now())
+}
+
+model User {
+  id       String @id @default(uuid())
+  email    String @unique
+  password String
+
+  // use this field to store the JWT token
+  // TODO change this to use sessions instead, to allow for logout, detect devices, and more
+  accessTokenSalt String? @unique
 
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt

@@ -9,6 +9,7 @@ import AppLayout from '@/app/AppLayout';
 import { Toaster } from '@/components/ui/sooner';
 
 import './globals.css';
+import AuthContainer from '@/containers/AuthContainer';
 
 const inter = Poppins({
   subsets: ['latin'],
@@ -43,7 +44,9 @@ export default function RootLayout({
         <ErrorContainer>
           <ThemeContainer>
             <QueryContainer>
-              <AppLayout>{children}</AppLayout>
+              <AuthContainer>
+                <AppLayout>{children}</AppLayout>
+              </AuthContainer>
             </QueryContainer>
           </ThemeContainer>
           <Toaster position={'top-right'} />

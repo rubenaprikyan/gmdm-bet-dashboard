@@ -1,9 +1,9 @@
 import { BaseModel } from '@/api/models/BaseModel';
 
 export interface SportEvent extends BaseModel {
-  id: string;
+  event_id: string;
+  event_name: string;
 
-  name: string;
   odds: number;
 
   createdAt: string;

@@ -29,11 +29,13 @@ function EventCard({ event, handleBet }: IEventProps) {
   return (
     <Card key={event.id} className='overflow-hidden'>
       <CardHeader className=''>
-        <CardTitle className='text-md'>{event.eventName}</CardTitle>
+        <CardTitle className='text-md'>
+          {event.event_name} - : x{event.odds}
+        </CardTitle>
       </CardHeader>
       <CardContent className='p-4'>
         <Button onClick={() => handleBet(event)} className=''>
-          Odds: {event.odds}
+          Place Bet
         </Button>
       </CardContent>
     </Card>

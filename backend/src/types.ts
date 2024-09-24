@@ -1,11 +1,12 @@
 import { Response, Request } from 'express';
+import { User } from '@prisma/client';
 
 export type BaseViewModel<T = any> = {
   data: T;
 };
 
 interface ContextualRequest extends Request {
-  session?: {};
+  user?: User;
 }
 
 /**
