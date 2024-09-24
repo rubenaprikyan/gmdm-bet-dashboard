@@ -1,6 +1,6 @@
 ## Project Overview
 The project is a simple REST API for a sport events application. Structured in a way that it can be easily extended to include more features.
-[Postman Collection](./docs/Blog.postman_collection.json)
+[Postman Collection](./docs/gmdm-api.postman_collection.json)
 
 ## How to run the project
 
