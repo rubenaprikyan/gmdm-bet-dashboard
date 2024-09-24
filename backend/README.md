@@ -41,6 +41,7 @@ npx prisma db push
 ```bash
 npx prisma db seed
 ```
+The seed script will create sample events and sample user in the database with predefined password and email.
 
 ## To open Postgres Admin, run the following command in your terminal
 

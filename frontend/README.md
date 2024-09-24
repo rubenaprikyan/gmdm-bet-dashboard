@@ -35,3 +35,9 @@ The project is structured as follows:
   - `/mutations` - hooks for mutations (update, delete, create)
   - `/queries` - hooks for fetching data
 
+
+## Pages
+
+- `/` - Includes button to show events
+- `/sport/events` - Shows list of events
+- `/auth/login` - Login page - includes demo user credentials by default to test easily

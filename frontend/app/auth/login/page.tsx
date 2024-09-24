@@ -29,7 +29,7 @@ const defaultValues: FormState = {
 export default function Login() {
   const router = useRouter();
 
-  const { mutateAsync, isPending } = useLogin({
+  const { mutate, isPending } = useLogin({
     onSuccess: async () => {
       toast.success('Successfully signed in !', {
         duration: 3000
@@ -51,11 +51,10 @@ export default function Login() {
     defaultValues,
   });
 
-  const onSubmit = React.useCallback(
-    async (formData: FormState) => {
-        await mutateAsync(formData);
+  const onSubmit = React.useCallback((formData: FormState) => {
+      mutate(formData);
     },
-    [mutateAsync]
+    [mutate]
   );
 
   return (
