@@ -16,6 +16,12 @@ cd backend
 pnpm install
 ```
 
+### Create `.env` file from `.env.example`
+
+```bash
+cp .env.example .env
+```
+
 ### Run database instance
 
 Make sure you have docker installed on your machine and running the daemon, alternatively you can use remote database by changing the connection string in `.env` file.

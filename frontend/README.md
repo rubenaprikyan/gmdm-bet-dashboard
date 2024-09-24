@@ -8,6 +8,10 @@ pnpm dev
 ```
 
 2. Create `.env` file from `.env.example` and insert the required values
+```bash
+cp .env.example .env
+```
+
 3. Run the development server
 ```bash
 pnpm dev
