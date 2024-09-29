@@ -55,7 +55,7 @@ And register the IP address in the browser with the port 5050:80
 
 ### Run the backend api
 
-To run the backend api, you need to create `.env` folder in the root of project, use `.env.example` as reference and fill actual values.
+To run the backend api, make sure you already have `.env`  file in the root of project, use `.env.example` as reference, find the helper command above.
 
 ```bash
 pnpm run api-dev

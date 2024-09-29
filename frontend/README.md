@@ -4,7 +4,7 @@ This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-
 
 1. Install dependencies
 ```bash
-pnpm dev
+pnpm install
 ```
 
 2. Create `.env` file from `.env.example` and insert the required values
